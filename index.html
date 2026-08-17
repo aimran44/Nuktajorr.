@@ -456,10 +456,10 @@
      5. Copy the long code after /e/ into FORM_ID
      6. Copy each entry.NUMBER into the three ENTRY lines below
      ------------------------------------------------------------------ */
-  const FORM_ID     = 'PASTE_FORM_ID_HERE';
-  const ENTRY_NAME  = 'entry.0000000';
-  const ENTRY_EMAIL = 'entry.0000000';
-  const ENTRY_ROLE  = 'entry.0000000';
+  const FORM_ID     = '1FAIpQLSdiTCdqHJ61pJSPGbP24RtaCNdBQc_kTLg5mVpOkqptbVMBRg';
+  const ENTRY_NAME  = 'entry.366340186';
+  const ENTRY_EMAIL = 'entry.1927329179';
+  const ENTRY_ROLE  = 'entry.1748935795';
 
   const form = document.getElementById('waitlistForm');
   const submitBtn = form.querySelector('button[type="submit"]');
@@ -478,12 +478,6 @@
 
     if (!name.value.trim()) { name.focus(); return; }
     if (!email.checkValidity()) { email.focus(); return; }
-
-    if (FORM_ID === 'PASTE_FORM_ID_HERE') {
-      errBox.textContent = 'This form is not connected yet. See the setup notes in the page source.';
-      errBox.style.display = 'block';
-      return;
-    }
 
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending';
