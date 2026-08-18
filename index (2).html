@@ -389,35 +389,11 @@
     <h2 class="rv">Be here when it opens.</h2>
     <p class="lede rv">We are building now. Leave your details and we will reach out before launch, whether you write or you commission.</p>
 
-    <form class="form rv" id="waitlistForm" novalidate>
-      <p style="display:none"><label>Leave this empty <input name="company" id="hp"></label></p>
-      <div class="row">
-        <div>
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" placeholder="Your name" required>
-        </div>
-        <div>
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" placeholder="you@example.com" required>
-        </div>
-      </div>
-      <div>
-        <label for="role">I am joining as</label>
-        <select id="role" name="role">
-          <option>A writer</option>
-          <option>A production house</option>
-          <option>Something else, I want to follow along</option>
-        </select>
-      </div>
-      <button class="btn btn-lg" type="submit">Join the waitlist</button>
-      <p class="form-note">We will only email you about Nuktajorr.</p>
-      <p class="form-error" id="formError" role="alert"></p>
-    </form>
+    <a class="btn btn-lg rv" id="waitlistBtn"
+       href="https://docs.google.com/forms/d/e/1FAIpQLSdiTCdqHJ61pJSPGbP24RtaCNdBQc_kTLg5mVpOkqptbVMBRg/viewform"
+       target="_blank" rel="noopener">Join the waitlist</a>
 
-    <div class="thanks" id="thanks" role="status">
-      <strong>You are on the list.</strong>
-      <p>We will be in touch before launch. In the meantime, we post on Instagram.</p>
-    </div>
+    <p class="form-note rv">Opens a short form. Three questions, takes a minute.</p>
   </section>
 </main>
 
@@ -443,62 +419,6 @@
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.rv').forEach(el => io.observe(el));
 
-  /* ------------------------------------------------------------------
-     GOOGLE FORM SETUP — paste your four values below.
-
-     1. Make a Google Form with three short answer questions, in this order:
-        Name, Email, I am joining as
-     2. Open the form, click the three dots (top right), "Get pre-filled link"
-     3. Type anything into all three boxes, click "Get link", then "Copy link"
-     4. Paste that link somewhere you can read it. It looks like:
-        https://docs.google.com/forms/d/e/1FAIpQLSxxxxxxxx/viewform?usp=pp_url
-          &entry.1111111=Name&entry.2222222=Email&entry.3333333=Role
-     5. Copy the long code after /e/ into FORM_ID
-     6. Copy each entry.NUMBER into the three ENTRY lines below
-     ------------------------------------------------------------------ */
-  const FORM_ID     = '1FAIpQLSdiTCdqHJ61pJSPGbP24RtaCNdBQc_kTLg5mVpOkqptbVMBRg';
-  const ENTRY_NAME  = 'entry.366340186';
-  const ENTRY_EMAIL = 'entry.1927329179';
-  const ENTRY_ROLE  = 'entry.1748935795';
-
-  const form = document.getElementById('waitlistForm');
-  const submitBtn = form.querySelector('button[type="submit"]');
-  const errBox = document.getElementById('formError');
-
-  form.addEventListener('submit', function (ev) {
-    ev.preventDefault();
-    const name = document.getElementById('name');
-    const email = document.getElementById('email');
-    const role = document.getElementById('role');
-
-    errBox.style.display = 'none';
-
-    // spam bots fill hidden fields, real people do not
-    if (document.getElementById('hp').value) return;
-
-    if (!name.value.trim()) { name.focus(); return; }
-    if (!email.checkValidity()) { email.focus(); return; }
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending';
-
-    const data = new URLSearchParams();
-    data.append(ENTRY_NAME, name.value.trim());
-    data.append(ENTRY_EMAIL, email.value.trim());
-    data.append(ENTRY_ROLE, role.value);
-
-    // Google does not allow reading its response from another site, so the
-    // request is fire and forget. It still lands in your responses sheet.
-    fetch('https://docs.google.com/forms/d/e/' + FORM_ID + '/formResponse', {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: data.toString()
-    }).finally(function () {
-      form.style.display = 'none';
-      document.getElementById('thanks').style.display = 'block';
-    });
-  });
 </script>
 
 </body>
